@@ -45,7 +45,7 @@
 #include <linux/sched.h>
 
 extern struct miscdevice memory_container_dev;
-
+extern void delete_all(void);
 
 int memory_container_init(void)
 {
@@ -59,11 +59,14 @@ int memory_container_init(void)
 
     printk(KERN_ERR "\"memory_container\" misc device installed\n");
     printk(KERN_ERR "\"memory_container\" version 0.1\n");
+    printk("Entering core.c");
     return ret;
 }
 
 
 void memory_container_exit(void)
 {
+    printk("Exiting core.c");
+    delete_all();
     misc_deregister(&memory_container_dev);
 }
